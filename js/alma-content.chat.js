@@ -2,17 +2,8 @@
 // Chat simple conectado a la Edge Function "bright-responder" en Supabase.
 
 (() => {
-  // URL base del backend (SIEMPRE tomada del index.html)
   const API_BASE = window.__API_BASE__;
-  const SUPABASE_ANON_KEY = window.__SUPABASE_ANON_KEY__ || "";
-
-  console.log("[Alma Content] API_BASE:", API_BASE);
-
-  if (!API_BASE) {
-    console.error(
-      "[Alma Content] ERROR: window.__API_BASE__ no está definido. Revisa el <script> en index.html."
-    );
-  }
+  const SUPABASE_ANON_KEY = window.__SUPABASE_ANON_KEY__;
 
   const CLIENT_ID_KEY = "alma-content:clientId";
 
