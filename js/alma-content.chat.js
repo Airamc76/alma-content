@@ -134,7 +134,7 @@
       } else {
         // Conversación válida pero sin mensajes: mostramos saludo inicial.
         const welcome =
-          "¡Hola! Soy Alma Viral Creator. Cuéntame qué tipo de contenido quieres crear hoy " +
+          "¡Hola! Soy Alma Content. Cuéntame qué tipo de contenido quieres crear hoy " +
           "(Reel, carrusel, historia, post largo, etc.) y qué objetivo tienes (atraer, educar, vender).";
 
         pushMessage("assistant", welcome);
@@ -187,7 +187,7 @@
       localStorage.setItem("alma-content:conversationId", conversationId);
 
       const welcome =
-        "¡Hola! Soy Alma Viral Creator. Cuéntame qué tipo de contenido quieres crear hoy " +
+        "¡Hola! Soy Alma Content. Cuéntame qué tipo de contenido quieres crear hoy " +
         "(Reel, carrusel, historia, post largo, etc.) y qué objetivo tienes (atraer, educar, vender).";
 
       pushMessage("assistant", welcome);
