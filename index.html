@@ -27,12 +27,12 @@
   <link href="css/alma-content.css?v=1" rel="stylesheet" />
 
   <script>
-    // Ahora el front habla con Vercel, y Vercel habla con Supabase
+    // AHORA el front habla con Vercel (proxy), NO directo con Supabase
     window.__API_BASE__ = "/api/alma";
 
-    // Mantén tu anon key igual
-    window.__SUPABASE_ANON_KEY__ =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprZGxqZXZmd2hsbXh0aGplb2RuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM3ODAxNjMsImV4cCI6MjA3OTM1NjE2M30.0qnIBaKPjc1SICY-8sqpBpIRUSONuJswGKn8fLp2gd4";
+    // 👉 IMPORTANTE: pon aquí la ANON KEY del PROYECTO NUEVO
+    // Supabase → Settings → API → "anon public"
+    window.__SUPABASE_ANON_KEY__ = "TU_NUEVA_ANON_KEY_AQUÍ";
   </script>
 </head>
 <body>

@@ -8,7 +8,7 @@ export const config = {
 };
 
 const SUPABASE_FUNCTION_BASE =
-  "https://zkdljefwhlmxthjeodn.supabase.co/functions/v1/bright-responder";
+  "https://tdixwtuowsoodobszolp.supabase.co/functions/v1/bright-responder";
 
 export default async function handler(request) {
   const incomingUrl = new URL(request.url);
