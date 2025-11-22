@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <title>Alma Content · Asistente IA para Contenido Irresistible</title>
+
+  <meta name="description" content="Alma Content es tu asistente IA para diseñar contenidos irresistibles: posts, emails, guiones y más." />
+  <meta name="theme-color" content="#020617" />
+
+  <!-- Open Graph básico -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Alma Content · Asistente IA" />
+  <meta property="og:description" content="Crea contenido estratégico y persuasivo junto a Alma Content." />
+  <meta property="og:image" content="https://tu-dominio.com/og-alma-content.png" />
+
+  <!-- Fuente -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/alma-content-logo.svg" />
+
+  <!-- Estilos principales -->
+  <link href="css/alma-content.css?v=1" rel="stylesheet" />
+
+  <script>
+    // URL base de TU función en Supabase
+    window.__API_BASE__ = "https://zkdljefwhlmxthjeodn.supabase.co/functions/v1/bright-responder";
+
+    // Tu anon key pública de Supabase (la que ves en Settings → API → anon public)
+    window.__SUPABASE_ANON_KEY__ = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprZGxqZXZmd2hsbXh0aGplb2RuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM3ODAxNjMsImV4cCI6MjA3OTM1NjE2M30.0qnIBaKPjc1SICY-8sqpBpIRUSONuJswGKn8fLp2gd4";
+  </script>
+</head>
+<body>
+  <!-- PANTALLA 1: HERO DE BIENVENIDA -->
+  <section id="hero" class="hero" aria-label="Pantalla de bienvenida de Alma Content">
+    <div class="hero-card">
+      <div class="hero-pill">Alma Content</div>
+
+      <div class="hero-logo-circle">
+        <img src="assets/alma-content-logo.svg" alt="Logo de Alma Content" class="hero-logo-img" />
+      </div>
+
+      <h1 class="hero-title">Crea contenido que convierte</h1>
+      <p class="hero-subtitle">
+        Ambición, Liderazgo, Motivo y Acción para tu contenido.
+      </p>
+      <p class="hero-description">
+        Tu asistente IA para diseñar <strong>ideas, guiones y piezas de contenido</strong> listas para publicar.
+      </p>
+
+      <div class="hero-tags">
+        <span class="hero-tag">Reels & Shorts</span>
+        <span class="hero-tag">Emails & secuencias</span>
+        <span class="hero-tag">Carouseles & posts</span>
+      </div>
+
+      <button class="btn btn-primary hero-start-btn" type="button">
+        Comenzar con Alma Content
+      </button>
+    </div>
+
+    <div class="beta-banner">
+      <span class="beta-pill">BETA</span>
+      <span class="beta-text">
+        Alma Content está en versión beta y puede contener detalles por pulir. 
+        Si quieres reportar un problema o enviar feedback, escribe a
+        <a href="mailto:soporte.alma.bot@gmail.com">soporte.alma.bot@gmail.com</a>.
+      </span>
+      <button class="beta-close" type="button" aria-label="Cerrar aviso" onclick="this.parentElement.style.display='none'">
+        ✕
+      </button>
+    </div>
+  </section>
+
+  <!-- PANTALLA 2: APP SHELL (CHAT) -->
+  <div class="app-shell" id="app-root">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="app-header-left">
+        <div class="app-brand">
+          <div class="app-logo-circle">
+            <img src="assets/alma-content-logo.svg" alt="Logo de Alma Content" class="app-logo-img" />
+          </div>
+          <div class="app-brand-text">
+            <h2 class="app-title">Alma Content · Asistente</h2>
+            <p class="app-subtitle">Tu IA para crear contenido estratégico y persuasivo</p>
+          </div>
+        </div>
+        <div class="app-status">
+          <span class="status-dot"></span>
+          <span class="status-text">conectada</span>
+        </div>
+      </div>
+
+      <div class="app-header-right">
+        <div class="app-mode-pill">
+          <span class="mode-label">Modo:</span>
+          <span class="mode-value" data-mode="general">Contenido general</span>
+        </div>
+
+        <button type="button" class="btn btn-secondary" id="new-conversation-btn" data-role="new-conversation">
+          Nueva
+        </button>
+        <button type="button" class="btn btn-ghost" id="clear-conversation-btn" data-role="clear-conversation">
+          Limpiar
+        </button>
+      </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="app-main">
+      <!-- Barra lateral -->
+      <aside class="app-sidebar" aria-label="Información de Alma Content">
+        <h3 class="sidebar-title">Sobre Alma Content</h3>
+        <p class="sidebar-text">
+          Alma Content te ayuda a convertir tus ideas en piezas de contenido listas para publicar
+          en redes, email y otros canales.
+        </p>
+
+        <div class="sidebar-section">
+          <h4 class="sidebar-subtitle">Qué puedes crear aquí</h4>
+          <ul class="sidebar-list">
+            <li>Guiones para Reels, Shorts y TikToks.</li>
+            <li>Hilos, carouseles y posts para tus redes.</li>
+            <li>Emails de bienvenida, nurturing y venta.</li>
+            <li>Adaptaciones de contenido largo a formatos cortos.</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <h4 class="sidebar-subtitle">Cómo sacarle más provecho</h4>
+          <ul class="sidebar-list">
+            <li>Indica el objetivo del contenido (atraer, educar, vender).</li>
+            <li>Especifica la plataforma y el tono que quieres.</li>
+            <li>Comparte ejemplos de textos que te gusten.</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-hint">
+          💡 Consejo: empieza con <strong>“Quiero crear contenido sobre…”</strong> 
+          y deja que Alma Content te proponga ideas y estructuras.
+        </div>
+      </aside>
+
+      <!-- Panel de chat -->
+      <section class="chat-panel" aria-label="Chat con Alma Content">
+        <div class="chat-messages-wrapper">
+          <div id="chat-messages" class="chat-messages" role="log" aria-live="polite">
+            <!-- El JS agregará los mensajes aquí -->
+            <div id="typing-indicator" class="typing-indicator" aria-hidden="true">
+              <div class="typing-dots">
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+              </div>
+              <span>Alma está pensando…</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input de mensaje -->
+        <form id="chat-form" class="chat-input-area" aria-label="Escribir mensaje a Alma Content">
+          <label for="chat-input" class="sr-only">Escribe tu mensaje</label>
+          <div class="chat-input-inner">
+            <textarea
+              id="chat-input"
+              class="chat-input"
+              name="message"
+              rows="1"
+              placeholder="Cuéntame qué tipo de contenido quieres crear... (Shift+Enter para salto de línea)"
+              autocomplete="off"
+            ></textarea>
+            <button type="submit" id="send-button" class="btn btn-primary">
+              Enviar
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p class="footer-text">
+        Alma Content · Asistente IA para Contenido Irresistible — v1.0
+      </p>
+    </footer>
+  </div>
+
+  <!-- Script para cambiar de pantalla (hero → chat) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const hero = document.getElementById('hero');
+      const appRoot = document.getElementById('app-root');
+      const startBtn = document.querySelector('.hero-start-btn');
+
+      if (hero && appRoot && startBtn) {
+        startBtn.addEventListener('click', function () {
+          hero.style.display = 'none';
+          appRoot.classList.add('is-visible');
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        });
+      }
+    });
+  </script>
+
+  <!-- JS de la app (mismo orden que usas ahora) -->
+  <script src="./js/app.state.js?v=4"></script>
+  <script src="./js/app.api.js?v=4"></script>
+  <script src="./js/app.ui.js?v=4"></script>
+  <script src="./js/app.main.js?v=4"></script>
+  <script src="./js/alma-content.chat.js?v=1"></script>
+</body>
+</html>
