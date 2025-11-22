@@ -54,9 +54,22 @@
   }
 
   function showTyping(show) {
-    if (!typing) return;
-    typing.classList.toggle("visible", !!show);
-    if (show) scrollToBottom();
+    if (!typing || !chatMessages) return;
+
+    if (show) {
+      // Aseguramos que el indicador quede siempre al final del listado de mensajes
+      if (typing.parentElement !== chatMessages) {
+        chatMessages.appendChild(typing);
+      } else if (typing.nextSibling) {
+        chatMessages.removeChild(typing);
+        chatMessages.appendChild(typing);
+      }
+
+      typing.classList.add("visible");
+      scrollToBottom();
+    } else {
+      typing.classList.remove("visible");
+    }
   }
 
   function createBubble(role, content) {
@@ -86,6 +99,37 @@
       headers["Authorization"] = "Bearer " + SUPABASE_ANON_KEY;
     }
     return headers;
+  }
+
+  async function loadHistory() {
+    if (!conversationId) return;
+
+    try {
+      showTyping(true);
+
+      const res = await fetch(
+        `${API_BASE}/conversations/${encodeURIComponent(conversationId)}/messages`,
+        {
+          method: "GET",
+          headers: authHeaders(),
+        }
+      );
+
+      const json = await res.json().catch(() => null);
+      if (!res.ok || !json?.ok || !Array.isArray(json.data)) {
+        return;
+      }
+
+      for (const m of json.data) {
+        const role = m.role === "assistant" ? "assistant" : "user";
+        const content = String(m.content ?? "");
+        if (content) pushMessage(role, content);
+      }
+    } catch (err) {
+      console.error("Error cargando historial de conversación", err);
+    } finally {
+      showTyping(false);
+    }
   }
 
   async function ensureConversation() {
@@ -158,6 +202,11 @@
   }
 
   // Eventos UI
+  // Al iniciar, si ya hay una conversación previa, intentamos recuperar su historial.
+  if (conversationId) {
+    loadHistory();
+  }
+
   if (form && input) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
