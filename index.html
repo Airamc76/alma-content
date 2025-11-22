@@ -27,11 +27,12 @@
   <link href="css/alma-content.css?v=1" rel="stylesheet" />
 
   <script>
-    // URL base de TU función en Supabase
-    window.__API_BASE__ = "https://zkdljefwhlmxthjeodn.supabase.co/functions/v1/bright-responder";
+    // Ahora el front habla con Vercel, y Vercel habla con Supabase
+    window.__API_BASE__ = "/api/alma";
 
-    // Tu anon key pública de Supabase (la que ves en Settings → API → anon public)
-    window.__SUPABASE_ANON_KEY__ = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprZGxqZXZmd2hsbXh0aGplb2RuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM3ODAxNjMsImV4cCI6MjA3OTM1NjE2M30.0qnIBaKPjc1SICY-8sqpBpIRUSONuJswGKn8fLp2gd4";
+    // Mantén tu anon key igual
+    window.__SUPABASE_ANON_KEY__ =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprZGxqZXZmd2hsbXh0aGplb2RuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM3ODAxNjMsImV4cCI6MjA3OTM1NjE2M30.0qnIBaKPjc1SICY-8sqpBpIRUSONuJswGKn8fLp2gd4";
   </script>
 </head>
 <body>
