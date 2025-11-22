@@ -116,14 +116,28 @@
       );
 
       const json = await res.json().catch(() => null);
-      if (!res.ok || !json?.ok || !Array.isArray(json.data)) {
+
+      // Si la conversación ya no existe o hay error, empezamos una nueva con saludo.
+      if (!res.ok || !json?.ok) {
+        conversationId = null;
+        localStorage.removeItem("alma-content:conversationId");
+        await startNewConversationWithGreeting();
         return;
       }
 
-      for (const m of json.data) {
-        const role = m.role === "assistant" ? "assistant" : "user";
-        const content = String(m.content ?? "");
-        if (content) pushMessage(role, content);
+      if (Array.isArray(json.data) && json.data.length > 0) {
+        for (const m of json.data) {
+          const role = m.role === "assistant" ? "assistant" : "user";
+          const content = String(m.content ?? "");
+          if (content) pushMessage(role, content);
+        }
+      } else {
+        // Conversación válida pero sin mensajes: mostramos saludo inicial.
+        const welcome =
+          "¡Hola! Soy Alma Viral Creator. Cuéntame qué tipo de contenido quieres crear hoy " +
+          "(Reel, carrusel, historia, post largo, etc.) y qué objetivo tienes (atraer, educar, vender).";
+
+        pushMessage("assistant", welcome);
       }
     } catch (err) {
       console.error("Error cargando historial de conversación", err);
