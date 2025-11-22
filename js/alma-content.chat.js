@@ -153,6 +153,37 @@
     return conversationId;
   }
 
+  async function startNewConversationWithGreeting() {
+    try {
+      showTyping(true);
+
+      const res = await fetch(`${API_BASE}/conversations`, {
+        method: "POST",
+        headers: authHeaders(),
+        body: JSON.stringify({ title: "Alma Content" }),
+      });
+
+      const json = await res.json().catch(() => null);
+      if (!res.ok || !json?.ok || !json.data?.id) {
+        console.error("Error creando nueva conversación desde 'Nueva'", json);
+        return;
+      }
+
+      conversationId = json.data.id;
+      localStorage.setItem("alma-content:conversationId", conversationId);
+
+      const welcome =
+        "¡Hola! Soy Alma Viral Creator. Cuéntame qué tipo de contenido quieres crear hoy " +
+        "(Reel, carrusel, historia, post largo, etc.) y qué objetivo tienes (atraer, educar, vender).";
+
+      pushMessage("assistant", welcome);
+    } catch (err) {
+      console.error("Error iniciando nueva conversación con saludo", err);
+    } finally {
+      showTyping(false);
+    }
+  }
+
   async function sendMessage(text) {
     if (!text.trim()) return;
     if (sending) return;
@@ -202,9 +233,11 @@
   }
 
   // Eventos UI
-  // Al iniciar, si ya hay una conversación previa, intentamos recuperar su historial.
+  // Al iniciar: si hay conversación previa, cargamos historial; si no, creamos una nueva con saludo.
   if (conversationId) {
     loadHistory();
+  } else {
+    startNewConversationWithGreeting();
   }
 
   if (form && input) {
@@ -228,6 +261,9 @@
       conversationId = null;
       localStorage.removeItem("alma-content:conversationId");
       if (chatMessages) chatMessages.innerHTML = "";
+
+      // Creamos inmediatamente una nueva conversación y mostramos saludo de bienvenida
+      startNewConversationWithGreeting();
     });
   }
 
