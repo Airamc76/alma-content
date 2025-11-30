@@ -114,7 +114,18 @@
           Volver al portal de IAs
         </a>
       </div>
+      <!-- Botón menú SOLO mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-btn" type="button" aria-label="Abrir menú de opciones">
+        ☰
+      </button>
     </header>
+
+    <!-- Menú desplegable SOLO mobile -->
+    <div id="mobile-menu" class="mobile-menu" aria-label="Opciones de Alma Content">
+      <button type="button" id="mobile-menu-new" class="mobile-menu-item">Nueva</button>
+      <button type="button" id="mobile-menu-clear" class="mobile-menu-item">Limpiar</button>
+      <button type="button" id="mobile-menu-back" class="mobile-menu-item">Volver al portal de IAs</button>
+    </div>
 
     <!-- Contenido principal -->
     <main class="app-main">
@@ -207,6 +218,59 @@
           hero.style.display = 'none';
           appRoot.classList.add('is-visible');
           window.scrollTo({ top: 0, behavior: 'instant' });
+        });
+      }
+    });
+  </script>
+
+  <!-- Script para menú mobile -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuBtn = document.getElementById('mobile-menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+
+      if (!menuBtn || !menu) return;
+
+      const btnNewDesktop   = document.getElementById('new-conversation-btn');
+      const btnClearDesktop = document.getElementById('clear-conversation-btn');
+      const linkPortal      = document.querySelector('.app-header-right a.btn');
+
+      // Toggle abrir/cerrar
+      menuBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        menu.classList.toggle('open');
+      });
+
+      // Cerrar al hacer click fuera
+      document.addEventListener('click', function (e) {
+        if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
+          menu.classList.remove('open');
+        }
+      });
+
+      // Cerrar al pulsar una opción y reenviar a los botones de desktop
+      const mobileNew   = document.getElementById('mobile-menu-new');
+      const mobileClear = document.getElementById('mobile-menu-clear');
+      const mobileBack  = document.getElementById('mobile-menu-back');
+
+      if (mobileNew && btnNewDesktop) {
+        mobileNew.addEventListener('click', function () {
+          menu.classList.remove('open');
+          btnNewDesktop.click();
+        });
+      }
+
+      if (mobileClear && btnClearDesktop) {
+        mobileClear.addEventListener('click', function () {
+          menu.classList.remove('open');
+          btnClearDesktop.click();
+        });
+      }
+
+      if (mobileBack && linkPortal) {
+        mobileBack.addEventListener('click', function () {
+          menu.classList.remove('open');
+          linkPortal.click();
         });
       }
     });
